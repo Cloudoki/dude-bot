@@ -3,6 +3,7 @@
 import pyaudio
 import signal
 import sys
+import wave
 
 chunk = 2048
 FORMAT = pyaudio.paInt16
