@@ -14,7 +14,7 @@ Download and Install [wolframAlpha python library](https://github.com/jaraco/wol
 
 Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
-    $ sudo pip install pyvona requests pygame pyaudio
+    $ sudo pip install pyvona requests pygame
 
 Make sure scripts are executable
 
