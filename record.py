@@ -24,8 +24,8 @@ data = ''
 rel = RATE/chunk
 slid_win = deque(maxlen=SILENCE_LIMIT*rel)
 started = False
-
-while (True):
+recording = True
+while (recording):
     data = stream.read(chunk)
     slid_win.append (abs(audioop.avg(data, 2)))
 
@@ -43,7 +43,7 @@ while (True):
         #all_m= []
         stream.close()
         p.terminate()
-        return
+        recording = False
 
 
 def save_speech(data, p):
