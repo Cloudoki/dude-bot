@@ -32,10 +32,10 @@ Create configuration file `config.cfg` at project root
 
 ```
 [main]
-app_id = "YOUR-APIKEYHERE"
-access_key = "IVONA_ACCESS_KEY"
-secret_key = "IVONA_SECRET_KEY"
-speech_key = "GOOGLE_SPEECH_KEY"
+app_id = YOUR-APIKEYHERE
+access_key = IVONA_ACCESS_KEY
+secret_key = IVONA_SECRET_KEY
+speech_key = GOOGLE_SPEECH_KEY
 ```
 
 ## Usage
