@@ -4,7 +4,7 @@
 
 Make sure you have recording and python installed
 
-    $ sudo apt-get install libav-tools python-setuptools easy_install pip
+    $ sudo apt-get install libav-tools portaudio19-dev python-setuptools easy_install pip
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
@@ -12,9 +12,9 @@ Download and Install [wolframAlpha python library](https://github.com/jaraco/wol
 
     $ sudo python setup.py
 
-Install [pyvona](https://github.com/zbears/pyvona) and its dependencies (pygame for speak functionality)
+Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
-    $ pip install pyvona requests pygame
+    $ sudo pip install pyvona requests pygame pyaudio
 
 Make sure scripts are executable
 
