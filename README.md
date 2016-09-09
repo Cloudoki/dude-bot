@@ -4,7 +4,7 @@
 
 Make sure you have recording and python installed
 
-    $ sudo apt-get install ffmpeg python-setuptools easy_install pip
+    $ sudo apt-get install libav-tools python-setuptools easy_install pip
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
