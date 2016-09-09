@@ -26,7 +26,7 @@ Get an [IVONA Speech Cloud Account](https://www.ivona.com/us/for-business/speech
 
 Use a google speech v2 [Developers Console](https://console.developers.google.com/apis/library) - [api-keys](http://www.chromium.org/developers/how-tos/api-keys),
 
-NOTICE: has recently launched Cloud Google Speech.
+NOTICE: Google has recently launched Cloud Google Speech.
 
 Create configuration file `config.cfg` at project root
 
