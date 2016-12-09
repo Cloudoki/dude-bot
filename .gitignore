@@ -23,3 +23,5 @@ config.cfg
 **/stt.txt
 **/file.flac
 **/file.wav
+
+venv/
