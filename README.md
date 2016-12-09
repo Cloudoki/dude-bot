@@ -16,17 +16,15 @@ Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
     $ sudo pip install pyvona requests pygame
 
-Make sure scripts are executable
+Install virtualenv
 
-    $ chmod +x *.sh **/*.sh
+    $ sudo apt-get install python-virtualenv
+
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
 Get an [IVONA Speech Cloud Account](https://www.ivona.com/us/for-business/speech-cloud/) and generate credentials: Access and Secret Key
 
-Use a google speech v2 [Developers Console](https://console.developers.google.com/apis/library) - [api-keys](http://www.chromium.org/developers/how-tos/api-keys),
-
-NOTICE: Google has recently launched Cloud Google Speech.
 
 Create configuration file `config.cfg` at project root
 
@@ -35,12 +33,23 @@ Create configuration file `config.cfg` at project root
 app_id = YOUR-APIKEYHERE
 access_key = IVONA_ACCESS_KEY
 secret_key = IVONA_SECRET_KEY
-speech_key = GOOGLE_SPEECH_KEY
 ```
 
 ## Usage
 
-    $ ./main.sh
+Create a virtual environment and install pyramid.
+
+    $ mkdir venv
+    $ export VENV=path-to-your-dir/venv
+    $ virtualenv --system-site-packages $VENV
+    $ . $VENV/bin/activate
+    $ $VENV/bin/pip install "pyramid==1.7.3"
+
+## Run
+
+    $ $VENV/bin/python api_dudebot.py
+
+The app will start listening on port: `8080`.
 
 ## Resources
 
