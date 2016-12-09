@@ -13,4 +13,4 @@ wget -q --post-file file.flac --header="Content-Type: audio/x-flac; rate=16000" 
 echo -n You Said:
 cat stt.txt
 
-rm file.flac file.wav > /dev/null 2>&1
+# rm file.flac file.wav > /dev/null 2>&1

@@ -18,7 +18,7 @@ Install [pyvona](https://github.com/zbears/pyvona) and its dependencies
 
 Make sure scripts are executable
 
-    $ chmod +x \*.sh \*\*/\*.sh
+    $ chmod +x *.sh **/*.sh
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
