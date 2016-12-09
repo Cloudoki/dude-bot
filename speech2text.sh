@@ -1,12 +1,10 @@
-#!/bin/bash
+o "Recording… Press Ctrl+C to Stop."
 
-echo "Recording… Press Ctrl+C to Stop."
-
-arecord file.wav --rate=16000 --channels=1
+arecord -D plughw:Twist,0 -vv file.wav --rate=16000 --channels=1
 
 echo "Processing…"
 
-avconv -i file.wav  -y -ar 16000 file.flac
+avconv -i file.wav -y -ar 16000 file.flac
 
 speech_key=$(python grab_config.py speech_key)
 
