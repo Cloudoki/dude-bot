@@ -4,6 +4,8 @@ import pyvona
 import wolframalpha
 import ConfigParser
 import random
+import json
+import threading
 
 from pyramid.config import Configurator
 from pyramid.response import Response
@@ -14,7 +16,7 @@ from pyramid.view import view_config
 from wsgiref.simple_server import make_server
 
 # setup logging
-logging.basicConfig()
+logging.basicConfig(filename='dudebot.log', level=logging.DEBUG)
 log = logging.getLogger(__file__)
 
 # get configuration
@@ -26,15 +28,14 @@ app_id = configParser.get('main', 'app_id')
 access_key = configParser.get('main', 'access_key')
 secret_key = configParser.get('main', 'secret_key')
 
+# bot triggers default
+triggers = ['hey dude']
 
 # available commands
-commands = { "commands" : { "question" : \
-                            ['question', 'questions', 'pergunta', 'questao']}}
+commands = { "question" : ['question', 'questions', 'pergunta', 'questao']},
 
-# greetings
-greetings = ["Sire?", "One is glad to be of service!", \
-             "How can I help?", "What is it!?! Can't you see I'm busy?", \
-             "WHAT???"]
+# greetings default
+greetings = ["Yes?"]
 
 # setup pyvona voice
 voice = pyvona.create_voice(access_key, secret_key)
@@ -48,9 +49,24 @@ wa = wolframalpha.Client(app_id)
 # app setup
 port = 8080
 
+def load_bot_configuration():
+    with open('bot_config.json') as json_data:
+        bot_conf = json.load(json_data)
+
+    return bot_conf
+
 
 def speak(text):
+    voice_cnf = load_bot_configuration()["voice"]
+    voice.voice_name=voice_cnf["voice_name"]
+    voice.language=voice_cnf["language"]
+    voice.gender=voice_cnf["gender"]
     voice.speak(text)
+
+
+def threadSpeak(text):
+    threading.Thread(target=speak, args=(text,)).start()
+
 
 # views
 @view_config(
@@ -62,17 +78,27 @@ def ping(request):
     return {"message": "pong"}
 
 
-# views
 @view_config(
     route_name='trigger',
     request_method=('GET'),
     renderer='json'
 )
 def listen(request):
+    greetings = load_bot_configuration()["greetings"]
     greet = random.choice(greetings)
     log.info(greet)
-    speak(greet)
+    threadSpeak(greet)
     return {"message": "triggered"}
+
+
+@view_config(
+    route_name='triggers',
+    request_method=('GET'),
+    renderer='json'
+)
+def get_triggers(request):
+    triggers = load_bot_configuration()["triggers"]
+    return triggers
 
 
 @view_config(
@@ -81,6 +107,7 @@ def listen(request):
     renderer='json'
 )
 def get_commands(request):
+    commands = load_bot_configuration()["commands"]
     return commands
 
 
@@ -93,11 +120,16 @@ def execute_command(request):
     data = request.json_body
     log.info(data)
     result = ""
-    if data.command and data.command == 'question':
-        res = wa.query(data.message)
-        for pod in res.pods:
-            for sub in pod.subpods:
-                result += sub.text + "\n"
+    if data["command"] and data["command"] == "question":
+        res = wa.query(data["message"])
+        if res["@numpods"] != '0':
+            for pod in res.pods:
+                for sub in pod.subpods:
+                    if sub.plaintext is not None:
+                        result += sub.plaintext + "\n"
+    if result == "":
+        result = "Sorry, coulnd't find the answer."
+    threadSpeak(result)
     return {"message": result}
 
 
@@ -120,6 +152,7 @@ if __name__ == '__main__':
     config = Configurator(settings=settings)
     # routes setup
     config.add_route('ping', '/ping')
+    config.add_route('triggers', '/available-triggers')
     config.add_route('trigger', '/trigger')
     config.add_route('commands', '/commands')
     config.add_route('execute', '/execute')
