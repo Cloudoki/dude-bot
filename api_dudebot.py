@@ -1,7 +1,6 @@
 import os
 import logging
 import pyvona
-import wolframalpha
 import ConfigParser
 import random
 import json
@@ -15,6 +14,8 @@ from pyramid.view import view_config
 
 from wsgiref.simple_server import make_server
 
+from commands.main_commands import process_command
+
 # setup logging
 logging.basicConfig(filename='dudebot.log', level=logging.DEBUG)
 log = logging.getLogger(__file__)
@@ -24,7 +25,6 @@ configParser = ConfigParser.RawConfigParser()
 configFilePath = r'config.cfg'
 configParser.read(configFilePath)
 
-app_id = configParser.get('main', 'app_id')
 access_key = configParser.get('main', 'access_key')
 secret_key = configParser.get('main', 'secret_key')
 
@@ -42,9 +42,6 @@ voice = pyvona.create_voice(access_key, secret_key)
 voice.voice_name="Brian"
 voice.language="en-GB"
 voice.gender="Male"
-
-# setup wolfram alpha
-wa = wolframalpha.Client(app_id)
 
 # app setup
 port = 8080
@@ -119,17 +116,15 @@ def get_commands(request):
 def execute_command(request):
     data = request.json_body
     log.info(data)
-    result = ""
-    if data["command"] and data["command"] == "question":
-        res = wa.query(data["message"])
-        if res["@numpods"] != '0':
-            for pod in res.pods:
-                for sub in pod.subpods:
-                    if sub.plaintext is not None:
-                        result += sub.plaintext + "\n"
-    if result == "":
-        result = "Sorry, coulnd't find the answer."
-    threadSpeak(result)
+    result = "Sorry but I cannot recognize the command."
+    if data["command"]:
+        if data["message"]:
+            result = process_command(data["command"], data["message"])
+        else:
+            result = process_command(data["command"])
+
+    if result != "":
+        threadSpeak(result)
     return {"message": result}
 
 

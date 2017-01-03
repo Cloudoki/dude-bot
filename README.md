@@ -1,6 +1,6 @@
 # Dude-Bot
 
-## Instalation
+## Installation
 
 Make sure you have recording and python installed
 
@@ -15,13 +15,27 @@ Install virtualenv
     $ sudo apt-get install python-virtualenv
 
 
-[optional] (see Usage)
+**[optional] (see Usage)**
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
     $ sudo python setup.py build
 
     $ sudo python setup.py
+
+<hr>
+
+## Usage
+
+Create a virtual environment and install wolframalpha (if you didn't before) and pyramid.
+
+    $ mkdir venv
+    $ export VENV=path-to-your-dir/venv
+    $ virtualenv --system-site-packages $VENV
+    $ . $VENV/bin/activate
+    $ $VENV/bin/pip install wolframalpha
+    $ $VENV/bin/pip install "pyramid==1.7.3"
+
 
 Get an [WolframAlpha API](http://products.wolframalpha.com/api/) APP-ID
 
@@ -47,26 +61,40 @@ Edit the bot configuration file `bot_config.json` at project root
 }
 ```
 
-- **triggers**: the triggers that "wake" the bot
+- **triggers**: the triggers that "wake" the bot (words you say so that the bot know you want to execute a command)
 - **grettings**: the bot responses to being woken
 - **voice**: the voice configuration from ivona
 
-## Usage
+## Note
+Before running check your pyOpenSSL version. It needs to be **>= 0.14**.
 
-Create a virtual environment and install wolframalpha (if you didn't before) and pyramid.
+Run this to check the version:
 
-    $ mkdir venv
-    $ export VENV=path-to-your-dir/venv
-    $ virtualenv --system-site-packages $VENV
-    $ . $VENV/bin/activate
-    $ $VENV/bin/pip install wolframalpha
-    $ $VENV/bin/pip install "pyramid==1.7.3"
+    $  python -c 'import OpenSSL; print(OpenSSL.__version__)'
+
+Run this to update it:    
+
+    $ sudo pip install -U pyOpenSSL
 
 ## Run
 
     $ $VENV/bin/python api_dudebot.py
 
 The app will start listening on port: `8080`.
+
+## Add New Commands
+In order to add new commands go into the `commands` folder and create the following structure:
+```
+commands/
+ └─── new_command/
+      |- __init__.py
+      │- new_command.py
+```
+- Create a new folder with the command name for simplicity
+- Add an empty `__init__.py` file
+- Add a new python file with the command name (again for simplicity reasons) where you'll add your code
+- Inside main_commands.py import the functionality created and edit the function `process_command` in order to call your functionality
+- Check the `ping` command for an simple example
 
 ## Resources
 

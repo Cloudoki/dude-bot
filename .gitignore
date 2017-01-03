@@ -25,3 +25,6 @@ config.cfg
 **/file.wav
 
 venv/
+
+# ignore compiled file
+*.pyc
