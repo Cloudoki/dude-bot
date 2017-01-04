@@ -71,3 +71,5 @@ Tell the bot to execute the command
         ```json
         {"message": "command result"}
         ```
+
+[<< back](./README.md)

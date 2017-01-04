@@ -112,6 +112,9 @@ commands/
   - **message:** if the the command expects more input other than the trigger set this to `true` if not set it to `false`
 - Check the `ping` command for an simple example
 
+## Docs
+[docs](./docs)
+
 ## Resources
 
 - [Raspberry Pi Voice Recognition Works Like Siri](https://oscarliang.com/raspberry-pi-voice-recognition-works-like-siri/)
