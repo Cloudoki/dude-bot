@@ -94,6 +94,22 @@ commands/
 - Add an empty `__init__.py` file
 - Add a new python file with the command name (again for simplicity reasons) where you'll add your code
 - Inside main_commands.py import the functionality created and edit the function `process_command` in order to call your functionality
+- Add the command to the bot configuration file in `bot_config.json`. Format:
+```
+"command": {
+  "triggers": [
+    "words",
+    "that",
+    "will",
+    "trigger",
+    "this",
+    "command"
+  ],
+  "message": true or false
+}
+```
+  - **triggers:** the words that will trigger the command
+  - **message:** if the the command expects more input other than the trigger set this to `true` if not set it to `false`
 - Check the `ping` command for an simple example
 
 ## Resources

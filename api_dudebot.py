@@ -32,7 +32,7 @@ secret_key = configParser.get('main', 'secret_key')
 triggers = ['hey dude']
 
 # available commands
-commands = { "question" : ['question', 'questions', 'pergunta', 'questao']},
+commands = { "question" : ['question', 'questions', 'pergunta', 'questao']}
 
 # greetings default
 greetings = ["Yes?"]
@@ -72,6 +72,8 @@ def threadSpeak(text):
     renderer='json'
 )
 def ping(request):
+    request.response.status = 200
+    log.info(voice.list_voices())
     return {"message": "pong"}
 
 
@@ -85,6 +87,7 @@ def listen(request):
     greet = random.choice(greetings)
     log.info(greet)
     threadSpeak(greet)
+    request.response.status = 200
     return {"message": "triggered"}
 
 
@@ -95,7 +98,8 @@ def listen(request):
 )
 def get_triggers(request):
     triggers = load_bot_configuration()["triggers"]
-    return triggers
+    request.response.status = 200
+    return {"triggers": triggers}
 
 
 @view_config(
@@ -105,6 +109,7 @@ def get_triggers(request):
 )
 def get_commands(request):
     commands = load_bot_configuration()["commands"]
+    request.response.status = 200
     return commands
 
 
@@ -125,6 +130,8 @@ def execute_command(request):
 
     if result != "":
         threadSpeak(result)
+
+    request.response.status = 200
     return {"message": result}
 
 

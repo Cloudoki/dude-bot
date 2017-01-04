@@ -7,12 +7,21 @@
     "okay dude"
   ],
   "commands": {
-    "question": [
-      "question",
-      "questions",
-      "pergunta",
-      "questao"
-    ]
+    "ping": {
+      "triggers": [
+        "ping"
+      ],
+      "message": false
+    },
+    "question": {
+      "triggers": [
+        "question",
+        "questions",
+        "pergunta",
+        "questao"
+      ],
+      "message": true
+    }
   },
   "greetings": [
     "Sire?",
