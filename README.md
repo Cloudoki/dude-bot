@@ -111,6 +111,7 @@ commands/
 ```
   - **triggers:** the words that will trigger the command
   - **message:** if the the command expects more input other than the trigger set this to `true` if not set it to `false`
+
 - Check the `ping` command for an simple example
 
 ## Docs
