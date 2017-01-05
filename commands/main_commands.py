@@ -16,6 +16,9 @@ def process_command(command, message=""):
     if command == "ping":
         result = pong()
     elif command == "question":
-        result = question.get_question_result(message)
+        if message != "":
+            result = question.get_question_result(message)
+        else:
+            result = "Sorry, I have no answer for that question."
 
     return result
