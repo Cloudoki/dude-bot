@@ -6,6 +6,7 @@ Get server `pong` response
     + Attributes (object)
         - message: pong (string)
     + Body
+
         ```json
         {"message": "pong"}
         ```
@@ -14,10 +15,11 @@ Get server `pong` response
 Trigger bot to speak one of the greetings
 + Response 200 (application/json)
     + Attributes (object)
-        - message: triggered (string)
+        - message: bot response (string)
     + Body
+
         ```json
-        {"message": "triggered"}
+        {"message": "bot response"}
         ```
 
 # GET /available-triggers
@@ -26,6 +28,7 @@ Get the triggers words that should trigger the bot greetings responses
     + Attributes (object)
         - triggers:["word1", "word2", "word3"]  (array of strings)
     + Body
+
         ```json
         {"triggers": ["word1", "word2", "word3"]}
         ```
@@ -38,6 +41,7 @@ Get the commands and commands configuration
           - message: false (boolean) if the command needs more input
           - triggers: ["command-trigger-word1", "command-trigger-word2", "command-trigger-word3"]  (array of strings)
     + Body
+
         ```json
         {
           "command": {
@@ -58,6 +62,7 @@ Tell the bot to execute the command
         - command: command (string)
         - message: more user input (string)
     + Body
+
         ```json
       {
         "command": "question",
@@ -68,6 +73,7 @@ Tell the bot to execute the command
     + Attributes (object)
         - message: command result (string)
     + Body
+
         ```json
         {"message": "command result"}
         ```

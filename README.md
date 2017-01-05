@@ -15,7 +15,7 @@ Install virtualenv
     $ sudo apt-get install python-virtualenv
 
 
-**[optional] (see Usage)**
+**\[optional\](see Usage)**
 
 Download and Install [wolframAlpha python library](https://github.com/jaraco/wolframalpha)
 
@@ -81,6 +81,7 @@ Run this to update it:
     $ $VENV/bin/python api_dudebot.py
 
 The app will start listening on port: `8080`.
+Open the browser into `localhost:8080` and you should see the bot.
 
 ## Add New Commands
 In order to add new commands go into the `commands` folder and create the following structure:

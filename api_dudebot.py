@@ -88,7 +88,7 @@ def listen(request):
     log.info(greet)
     threadSpeak(greet)
     request.response.status = 200
-    return {"message": "triggered"}
+    return {"message": greet}
 
 
 @view_config(
@@ -158,6 +158,7 @@ if __name__ == '__main__':
     config.add_route('trigger', '/trigger')
     config.add_route('commands', '/commands')
     config.add_route('execute', '/execute')
+    config.add_static_view('/', 'site', cache_max_age=3600)
     # scan for @view_config decorators
     config.scan()
     # serve app
