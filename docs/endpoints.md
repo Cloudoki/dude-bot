@@ -26,7 +26,7 @@ Trigger bot to speak one of the greetings
 Get the triggers words that should trigger the bot greetings responses
 + Response 200 (application/json)
     + Attributes (object)
-        - triggers:["word1", "word2", "word3"]  (array of strings)
+        - triggers: \["word1", "word2", "word3"\]  (array of strings)
     + Body
 
         ```json
@@ -39,7 +39,7 @@ Get the commands and commands configuration
     + Attributes (object)
         - command: (object) the defined command
           - message: false (boolean) if the command needs more input
-          - triggers: ["command-trigger-word1", "command-trigger-word2", "command-trigger-word3"]  (array of strings)
+          - triggers: \["command-trigger-word1", "command-trigger-word2", "command-trigger-word3"\]  (array of strings)
     + Body
 
         ```json
