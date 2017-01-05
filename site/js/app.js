@@ -172,8 +172,8 @@ function kickoff() {
     finals.innerHTML = resp.message.replace(/\n/g, "<br />") || "";
   }
 
-  function callCommand(command) {
-    request('POST', 'execute', {"command": command, "message": ""}, showResult);
+  function callCommand(command, message) {
+    request('POST', 'execute', {"command": command, "message": message || ""}, showResult);
   }
 
   // ---------------------------- WEB AUDIO ---------------------------
